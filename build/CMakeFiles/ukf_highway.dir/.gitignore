@@ -1,0 +1,5 @@
+*.make
+*.cmake
+*.txt
+/CXX.includecache
+/depend.internal
