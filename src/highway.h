@@ -20,14 +20,14 @@ public:
 	// Parameters 
 	// --------------------------------
 	// Set which cars to track with UKF
-	std::vector<bool> trackCars = {true,true,true};
+	std::vector<bool> trackCars = {true,false,false};
 	// Visualize sensor measurements
-	bool visualize_lidar = true;
-	bool visualize_radar = true;
+	bool visualize_lidar = false;
+	bool visualize_radar = false;
 	bool visualize_pcd = false;
 	// Predict path in the future using UKF
-	double projectedTime = 0;
-	int projectedSteps = 0;
+	double projectedTime = 2.0;
+	int projectedSteps = 6;
 	// --------------------------------
 
 	Highway(pcl::visualization::PCLVisualizer::Ptr& viewer)
@@ -132,7 +132,7 @@ public:
 				tools.ground_truth.push_back(gt);
 				tools.lidarSense(traffic[i], viewer, timestamp, visualize_lidar);
 				tools.radarSense(traffic[i], egoCar, viewer, timestamp, visualize_radar);
-				tools.ukfResults(traffic[i],viewer, projectedTime, projectedSteps);
+				tools.ukfResults(traffic[i], viewer, projectedTime, projectedSteps);
 				VectorXd estimate(4);
 				double v  = traffic[i].ukf.x_(2);
     			double yaw = traffic[i].ukf.x_(3);
