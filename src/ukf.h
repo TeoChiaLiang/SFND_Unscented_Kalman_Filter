@@ -96,11 +96,15 @@ class UKF {
   // Sigma point spreading parameter
   double lambda_;
 
+  double NIS_lidar;
+
+  double NIS_radar;
+
   void setWeight();
   //Prediction
   void GenerateSigmaPoints(Eigen::MatrixXd* Xsig_out);
-  void AugmentedSigmaPoints(Eigen::MatrixXd& Xsig_aug);
-  void SigmaPointPrediction(const Eigen::MatrixXd& Xsig_aug, const double delta_t);
+  void AugmentSigmaPoints(Eigen::MatrixXd& Xsig_aug);
+  void PredictSigmaPoint(const Eigen::MatrixXd& Xsig_aug, const double delta_t);
   void PredictMeanAndCovariance();
   //Update
   void PredictMeasurementLidar(Eigen::VectorXd& z_out, Eigen::MatrixXd& S_out, Eigen::MatrixXd& Zsig);
