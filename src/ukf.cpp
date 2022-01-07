@@ -22,7 +22,7 @@ UKF::UKF() {
   P_ = MatrixXd(5, 5);
 
   // Process noise standard deviation longitudinal acceleration in m/s^2
-  std_a_ = 2.0;
+  std_a_ = 1.0;
 
   // Process noise standard deviation yaw acceleration in rad/s^2
   std_yawdd_ = 0.3;
@@ -68,6 +68,8 @@ UKF::UKF() {
   x_ = Eigen::VectorXd::Zero(n_x_);
 
   P_ = Eigen::MatrixXd::Identity(n_x_, n_x_);
+  P_(3,3) = 0.3*0.3; 
+  P_(4,4) = 0.3*0.3;
 
   Xsig_pred_ = Eigen::MatrixXd::Zero(n_x_, 2 * n_aug_ + 1);
   
